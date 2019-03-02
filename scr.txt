@@ -1,0 +1,210 @@
+anbgd@anbgd:~/labs/lb20$ cat 4.txt 
+a
+b
+c
+d
+eanbgd@anbgd:~/labs/lb20$ cat 5.txt 
+a
+b
+с
+d
+eanbgd@anbgd:~/labs/lb20$ cmp -b 4.txt 5.txt
+4.txt 5.txt различаются: байт 5, строка 3 равен  12 ^J 321 M-Q
+anbgd@anbgd:~/labs/lb20$ cat 6.txt 
+bbbbbb
+xxx
+zyx
+zyy
+zyz
+zzz
+anbgd@anbgd:~/labs/lb20$ cat 7.txt 
+aaaaaa
+xxx
+zyx
+zyy
+zyz
+zzz
+anbgd@anbgd:~/labs/lb20$ comm 6.txt 7.txt
+	aaaaaa
+bbbbbb
+		xxx
+		zyx
+		zyy
+		zyz
+		zzz
+anbgd@anbgd:~/labs/lb20$ wc -lw 1.txt 2.txt 3.txt 4.txt 6.txt 7.txt
+  4  16 1.txt
+  3  18 2.txt
+  3  25 3.txt
+  4   5 4.txt
+  6   6 6.txt
+  6   6 7.txt
+ 26  76 итого
+anbgd@anbgd:~/labs/lb20$ echo "Heeeeey" | dd cbs=1 conv=unblock 2> /dev/null
+H
+e
+e
+e
+e
+e
+y
+
+
+anbgd@anbgd:~/labs/lb20$ diff -u 3.txt 2.txt | tee p.diff && patch -i p.diff -o result.txt 3.txt && cat result.txt
+--- 3.txt	2019-03-02 02:38:33.875767107 +0300
++++ 2.txt	2019-03-02 02:38:32.099772381 +0300
+@@ -1,4 +1,4 @@
+ Какая ночь! Я не могу.
+-Очень хочу спать, помогите, пожалуйста
+-Я никогда не делаю лабы вовремя и не знаю, как остановиться
++Не спится мне. Такая лунность.
++Еще как будто берегу
+ В душе утраченную юность.
+\ В конце файла нет новой строки
+patching file result.txt (read from 3.txt)
+Какая ночь! Я не могу.
+Не спится мне. Такая лунность.
+Еще как будто берегу
+В душе утраченную юность.anbgd@anbgd:~/labs/lb20$ grep -w "Не" 8.txt
+Не волнуйся, 
+Не плачь, 
+Не трудись, 
+anbgd@anbgd:~/labs/lb20$ cat 8.txt 
+Не волнуйся, 
+Не плачь, 
+Не трудись, 
+Сил иссякших и сердца не мучай. 
+Ты жива, 
+Ты во мне, 
+Ты в груди, 
+Как опора, 
+Как друг и как случай
+anbgd@anbgd:~/labs/lb20$ cat 2.txt 
+Какая ночь! Я не могу.
+Не спится мне. Такая лунность.
+Еще как будто берегу
+В душе утраченную юность.anbgd@anbgd:~/labs/lb20$ od 2.txt | head -2  && tail -1 2.txt
+0000000 115320 130320 135320 130320 107721 150040 150275 150676
+0000020 150607 020614 150040 020257 136720 132720 150040 150274
+В душе утраченную юность.anbgd@anbgd:~/labs/lb20$ cat 9.txt 
+1 aaa
+2 bbbb
+3 cccccanbgd@anbgd:~/labs/lb20$ cat 10.txt 
+1 3
+2 4
+3 5anbgd@anbgd:~/labs/lb20$ join 9.txt 10.txt
+1 aaa 3
+2 bbbb 4
+3 ccccc 5
+anbgd@anbgd:~/labs/lb20$ cat 11.txt 
+1111
+2222
+2222
+3333
+3333
+3333
+4444
+4444
+4444
+4444anbgd@anbgd:~/labs/lb20$ sort 11.txt | uniq -c | sort -nr 
+      4 4444
+      3 3333
+      2 2222
+      1 1111
+anbgd@anbgd:~/labs/lb20$ cat 12.txt 
+В эт7978ом мире я только9793 прохожий,
+Ты махни мне123 весёло4242й рукой.
+У осен234него м89есяца тоже
+Свет ласкающий, тихий такой.
+
+В п23242ервый раз я от м77696679есяца греюсь,
+В первый раз от343 прохлады согрет,
+И о2423пять и живу и н9ад4234еюсь
+На любовь, котор987ой уж нет.
+
+Это сде234лала наша равнинность,
+Посоленная белью песка,
+И измятая чья-то невинность,
+И кому-то род2423ная тоск243а.
+43
+Потому и навеки не ск978рою,
+Что любить не отдельно, не врозь -
+Нам одн563458ою любовью с тобою
+Эту роди234ну привелось234. anbgd@anbgd:~/labs/lb20$ tr -d 0-9 <12.txt
+В этом мире я только прохожий,
+Ты махни мне весёлой рукой.
+У осеннего месяца тоже
+Свет ласкающий, тихий такой.
+
+В первый раз я от месяца греюсь,
+В первый раз от прохлады согрет,
+И опять и живу и надеюсь
+На любовь, которой уж нет.
+
+Это сделала наша равнинность,
+Посоленная белью песка,
+И измятая чья-то невинность,
+И кому-то родная тоска.
+
+Потому и навеки не скрою,
+Что любить не отдельно, не врозь -
+Нам одною любовью с тобою
+Эту родину привелось. anbgd@anbgd:~/labs/lb20$ cat 1.txt 
+1 2 3 4
+1 2 3 4
+1 2 3 4
+1 2 3 4
+anbgd@anbgd:~/labs/lb20$ cut -b 5 1.txt
+3
+3
+3
+3
+anbgd@anbgd:~/labs/lb20$ paste -s 1.txt
+1 2 3 4	1 2 3 4	1 2 3 4	1 2 3 4
+anbgd@anbgd:~/labs/lb20$ split -b 8 1.txt
+anbgd@anbgd:~/labs/lb20$ ls
+1  10.txt  11.txt  12.txt  1.txt  2.txt  3.txt  4.txt  5.txt  6.txt  7.txt  8.txt  9.txt  p.diff  result.txt  script.sh  xaa  xab  xac  xad
+anbgd@anbgd:~/labs/lb20$ cat xaa
+1 2 3 4
+anbgd@anbgd:~/labs/lb20$ xargs -n 1 echo < 1.txt
+1
+2
+3
+4
+1
+2
+3
+4
+1
+2
+3
+4
+1
+2
+3
+4
+anbgd@anbgd:~/labs/lb20$ touch -d '2000-07-06 8:40:00' dateofbirth.my && ls -l dateofbirth.my
+-rw-r--r-- 1 anbgd anbgd 0 июл  6  2000 dateofbirth.my
+anbgd@anbgd:~/labs/lb20$ du -ach
+4,0K  ./8.txt
+0 ./dateofbirth.my
+4,0K  ./p.diff
+4,0K  ./result.txt
+4,0K  ./xad
+4,0K  ./xac
+4,0K  ./6.txt
+4,0K  ./9.txt
+4,0K  ./5.txt
+4,0K  ./7.txt
+4,0K  ./10.txt
+4,0K  ./12.txt
+4,0K  ./xab
+4,0K  ./script.sh
+4,0K  ./xaa
+4,0K  ./3.txt
+4,0K  ./2.txt
+4,0K  ./1.txt
+4,0K  ./11.txt
+4,0K  ./4.txt
+80K .
+80K итого
